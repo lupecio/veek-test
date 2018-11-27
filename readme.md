@@ -16,6 +16,10 @@ Run command to generate key:
 ```bash
 php artisan key:generate
 ```
+Run migrations:
+```bash
+php artisan migrate
+```
 
 ## Test
 
