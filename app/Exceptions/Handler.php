@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Utils\Messages;
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -46,6 +48,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+            return response()->json(["message" => Messages::NOT_FOUND], Response::HTTP_NOT_FOUND);
+        }
+
         return parent::render($request, $exception);
     }
 }
